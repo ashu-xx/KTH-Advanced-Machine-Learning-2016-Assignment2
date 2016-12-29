@@ -3,4 +3,4 @@ It includes implementation of Graphical models, Variational Inference and Expect
 All the codes are in python and mathematical derivation were written in Latex.
 I used ipython for development and directly converted them to python files for uploading here, so it is possible that 
 you might need to rewrite a few lines to get it working.
-Feel free to contact (tech.ashutoshmittal@gmail.com)
+Feel free to contact
