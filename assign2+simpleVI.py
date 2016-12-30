@@ -3,7 +3,7 @@
 
 # # Variational Inference
 
-# In[71]:
+# In[87]:
 
 import matplotlib.pyplot as plot
 import scipy.stats as ss
@@ -11,7 +11,7 @@ import numpy as np
 import math as math
 
 
-# In[72]:
+# In[88]:
 
 "genertes posterior probability q(mu,tau|D) for a set of values of mu_N,lamba_N,a_N,b_N"
 def est_posti(a_N,b_N,mew_N,l_N,mew,tau):
@@ -29,7 +29,7 @@ def est_posti(a_N,b_N,mew_N,l_N,mew,tau):
     return p1*p2
 
 
-# In[73]:
+# In[89]:
 
 "generates true posterior probability p(mu,tau|D) for the given value of mu_0,lamba_0,a_0,b_0"
 def true_posti(a_0,b_0,mew_0,l_0,mew,tau,x,N):
@@ -45,7 +45,7 @@ def true_posti(a_0,b_0,mew_0,l_0,mew,tau,x,N):
     return p1*p2
 
 
-# In[74]:
+# In[90]:
 
 "Used to invoke the posterior probability functions and generate zz for plotting purposes"
 def posti_plot(a_0,b_0,mew_0,l_0,m,t,div,z,flag,x=np.zeros(100) ,N=100):
@@ -60,7 +60,7 @@ def posti_plot(a_0,b_0,mew_0,l_0,m,t,div,z,flag,x=np.zeros(100) ,N=100):
     return z
 
 
-# In[75]:
+# In[91]:
 
 "generates the observations"
 def data(N):
@@ -72,14 +72,14 @@ def data(N):
     return D
 
 
-# In[76]:
+# In[92]:
 
 "updates b_N"
 def update_b(b_0,x2,l_0,mew_0,N,mew_N,l_N,x):
     return (b_0 + 0.5*(x2+l_0*mew_0*mew_0) + 0.5*(N+l_0)*(mew_N*mew_N+1/l_N) - (x+l_0*mew_0)*mew_N)
 
 
-# In[77]:
+# In[93]:
 
 "for plotting contours"
 div = 100
@@ -88,7 +88,7 @@ t=np.linspace(0.01,2,div)
 [xx,yy] = np.meshgrid(m,t)
 
 
-# In[78]:
+# In[94]:
 
 "Number of observations"
 N = 10
@@ -105,7 +105,7 @@ l_0 = 0
 mew_0 = 0
 
 
-# In[ ]:
+# In[95]:
 
 l_N=np.zeros(iter)
 b_N=np.zeros(iter)
@@ -134,36 +134,36 @@ for i in range(iter):
     print("Estimated [a_0,b_0,mew_0,l_0*tau] = ", [a_N,b_N[i],mew_N,l_N[i]])
 
 
-# In[ ]:
+# In[96]:
 
 "Plotting true posterior"
 zz_r = np.zeros((div,div),dtype=float)
 zz_r = posti_plot(a_0,b_0,mew_0,l_0,m,t,div,zz_r,1,D,N)
 
 
-# In[ ]:
+# In[103]:
 
 "Plotting estimated posterior distribution after the initial guess"
 zz_1 = np.zeros((div,div),dtype=float)
-zz_1 = posti_plot(5,5,0.5,0.5,m,t,div,zz_1,0)
+zz_1 = posti_plot(5,b_N[0],0.5,l_N[0],m,t,div,zz_2,0)
 
 "Plotting estimated posterior distribution after iterating once for q(tau)"
 zz_2 = np.zeros((div,div),dtype=float)
-zz_2 = posti_plot(a_N,b_N[0],0.5,0.5,m,t,div,zz_2,0)
+zz_2 = posti_plot(a_N,b_N[1],0.5,l_N[0],m,t,div,zz_2,0)
 
 "Plotting estimated posterior distribution after iterating once for q(tau) as well as q(mu)"
 zz_3 = np.zeros((div,div),dtype=float)
-zz_3 = posti_plot(a_N,b_N[0],mew_N,l_N[0],m,t,div,zz_2,0)
+zz_3 = posti_plot(a_N,b_N[1],mew_N,l_N[1],m,t,div,zz_2,0)
 
 
-# In[ ]:
+# In[104]:
 
 "Plotting for estimated posterior distribution after convergence"
 zz_f = np.zeros((div,div),dtype=float)
 zz_f = posti_plot(a_N,b_N[iter-1],mew_N,l_N[iter-1],m,t,div,zz_f,0)
 
 
-# In[ ]:
+# In[105]:
 
 cp1 = plot.contour(xx,yy,zz_r,colors='g')
 cp2 = plot.contour(xx,yy,zz_1,colors='b')
@@ -173,7 +173,7 @@ plot.ylabel('$\tau')
 plot.show()
 
 
-# In[ ]:
+# In[106]:
 
 cp1 = plot.contour(xx,yy,zz_r,colors='g')
 cp2 = plot.contour(xx,yy,zz_2,colors='b')
@@ -183,7 +183,7 @@ plot.ylabel('$\tau')
 plot.show()
 
 
-# In[ ]:
+# In[107]:
 
 cp1 = plot.contour(xx,yy,zz_r,colors='g')
 cp2 = plot.contour(xx,yy,zz_3,colors='b')
@@ -193,7 +193,7 @@ plot.ylabel('$\tau')
 plot.show()
 
 
-# In[ ]:
+# In[108]:
 
 cp1 = plot.contour(xx,yy,zz_r,colors='g')
 cp2 = plot.contour(xx,yy,zz_f,colors='b')
