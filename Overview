@@ -1,6 +1,0 @@
-This is my solution for assignment in KTH's Advanced-Machine-Learning-2016 course.
-It includes implementation of Graphical models, Variational Inference and Expectation Maximization algorithms.
-All the codes are in python and mathematical derivation were written in Latex.
-I used ipython for development and directly converted them to python files for uploading here, so it is possible that 
-you might need to rewrite a few lines to get it working.
-Feel free to contact
